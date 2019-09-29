@@ -1,8 +1,8 @@
 import React  from 'react';
 
 const Todos = ({deletetodo,projects})=>{
-   console.log(projects.project)
-   const todolist=projects.length ? (
+  
+   const todolist=projects && projects.length ? (
        projects.map(item=>{
       return(
           

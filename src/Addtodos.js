@@ -1,6 +1,9 @@
 import React, {Component}  from 'react';
 // import todos from './Todos'
 import {connect} from 'react-redux'
+import { createproject }from './actions/projectAction'
+
+import Todos from './Todos'
 
 
 
@@ -25,17 +28,19 @@ class Addtodos extends Component{
       handleSubmit = (e) =>{
         e.preventDefault();
         
-        this.props.Addtodos(this.state);
-        this.setState({
-           content:''
-        })
+        this.props.createproject(this.state);
+        // this.setState({
+        //    content:''
+        // })
 
       } 
 render(){
    const { projects }=this.props
     return(
        <div className="app container">
-       <form onSubmit={this.handleSubmit} project={projects}>
+       <Todos projects={projects}/>
+       
+       <form onSubmit={this.handleSubmit}>
                <input type="text" id="content" onChange={this.handleChange} />
                <button>Submit</button>
            </form>
@@ -57,5 +62,11 @@ const mapStateToProps =(state)=>{
 
 }
 
+const mapDispatchToProps = (dispatch) =>{
+return{
+    createproject: (project) => dispatch(createproject(project))
+}
+}
 
-export default connect (mapStateToProps)(Addtodos);
+
+export default connect (mapStateToProps,mapDispatchToProps)(Addtodos);
